@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskEntity } from './entities/task.entity';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 @Injectable()
 export class TaskService {
@@ -12,7 +13,7 @@ export class TaskService {
     private readonly taskRepository: Repository<TaskEntity>,
   ) {}
   async create(createTaskDto: CreateTaskDto): Promise<CreateTaskDto> {
-    return await this.taskRepository.save(createTaskDto);
+    return this.taskRepository.save(createTaskDto);
   }
 
   async findAll(condition): Promise<TaskEntity[]> {
@@ -23,12 +24,12 @@ export class TaskService {
     return this.taskRepository.findOne({ where: condition });
   }
 
-  async update(id: number, updateAuthDto: TaskEntity) {
+  async update(id: number, updateAuthDto: QueryDeepPartialEntity<TaskEntity>) {
     // @ts-ignore
     return this.taskRepository.update(id, updateAuthDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} auth`;
+    return this.taskRepository.delete(id);
   }
 }

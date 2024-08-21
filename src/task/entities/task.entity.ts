@@ -1,4 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { UserEntity } from 'src/auth/entities/auth.entity';
 
@@ -14,9 +20,12 @@ export class TaskEntity {
   description: string;
 
   @Column()
-  createdBy: number
+  createdBy: number;
+
+  @Column({ default: false })
+  completed: boolean;
 
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'createdBy' })
-  user: UserEntity
+  user: UserEntity;
 }
