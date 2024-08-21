@@ -85,7 +85,7 @@ export class AuthController {
     });
 
     return {
-      ...user,
+      user: user,
       token: accessToken
     };
   }
