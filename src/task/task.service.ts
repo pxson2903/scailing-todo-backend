@@ -56,7 +56,7 @@ export class TaskService {
     return this.taskRepository.update(id, {
       title: updateTaskDto.title,
       description: updateTaskDto.description,
-      completed: updateTaskDto.compelted,
+      completed: updateTaskDto.completed,
       temperature: weatherData.temperature,
       weatherDescription: weatherData.description,
       city: weatherData.city,
