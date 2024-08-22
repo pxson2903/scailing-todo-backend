@@ -7,15 +7,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { TaskModule } from './task/task.module';
+import { WeatherModule } from './weather/weather.module';
 
 @Module({
   imports: [
-    AuthModule,
-    TaskModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
     }),
+    AuthModule,
+    TaskModule,
+    WeatherModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: configuration().database.host,

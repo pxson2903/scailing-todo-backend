@@ -28,4 +28,22 @@ export class TaskEntity {
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'createdBy' })
   user: UserEntity;
+
+  @Column({ nullable: true })
+  temperature: number;
+
+  @Column({ nullable: true })
+  weatherDescription: string;
+
+  @Column({ nullable: true })
+  city: string;
+
+  @Column({ nullable: true })
+  country: string;
+
+  @Column({ nullable: true })
+  humidity: number;
+
+  @Column({ nullable: true })
+  windSpeed: number;
 }

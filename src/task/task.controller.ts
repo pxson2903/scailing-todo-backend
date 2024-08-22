@@ -31,8 +31,7 @@ export class TaskController {
   async create(@Body() createTaskDto: CreateTaskDto, @Req() request: Request) {
     const userId = request?.[`user`]?.id;
     return this.taskService.create({
-      title: createTaskDto.title,
-      description: createTaskDto.description,
+      ...createTaskDto,
       createdBy: userId,
     });
   }
@@ -57,11 +56,8 @@ export class TaskController {
 
   @UseGuards(TaskOwnerGuard)
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateTask: QueryDeepPartialEntity<TaskEntity>,
-  ) {
-    return this.taskService.update(+id, updateTask);
+  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+    return this.taskService.update(+id, updateTaskDto);
   }
 
   @UseGuards(TaskOwnerGuard)
