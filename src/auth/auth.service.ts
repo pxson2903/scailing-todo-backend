@@ -1,20 +1,19 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { UserEntity } from './entities/auth.entity';
 import { LoginDto } from './dto/login.dto';
-import { JwtPayloadDto } from './dto/jwt-payload.dto';
+import { UserRepository } from './user.repository';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
+    private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
   ) {}
   async create(createAuthDto: CreateAuthDto): Promise<CreateAuthDto> {

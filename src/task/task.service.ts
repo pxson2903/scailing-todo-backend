@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskEntity } from './entities/task.entity';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { TaskRepository } from './task.repository';
 
 @Injectable()
 export class TaskService {
   constructor(
     @InjectRepository(TaskEntity)
-    private readonly taskRepository: Repository<TaskEntity>,
+    private readonly taskRepository: TaskRepository,
   ) {}
   async create(createTaskDto: CreateTaskDto): Promise<CreateTaskDto> {
     return this.taskRepository.save(createTaskDto);

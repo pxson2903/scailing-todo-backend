@@ -10,6 +10,7 @@ import {
   Patch,
   Delete,
   Param,
+  BadRequestException,
 } from '@nestjs/common';
 
 import { TaskService } from './task.service';
@@ -42,6 +43,15 @@ export class TaskController {
     return this.taskService.findAll({
       createdBy: userId,
     });
+  }
+
+  @Get(':id')
+  async findById(@Param('id') id: string) {
+    const task = await this.taskService.findOne({ id: +id });
+    if (!task) {
+      throw new BadRequestException('Task not found');
+    }
+    return this.taskService.findOne({ id: +id });
   }
 
   @Patch(':id')
