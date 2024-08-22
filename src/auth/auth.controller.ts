@@ -19,7 +19,6 @@ import { AuthService } from './auth.service';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
-import { UserEntity } from './entities/auth.entity';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './auth.guard';
 
@@ -43,31 +42,6 @@ export class AuthController {
     });
   }
 
-  @Get('/users')
-  findAll() {
-    return this.authService.findAll();
-  }
-
-  @UseInterceptors(ClassSerializerInterceptor, AuthInterceptor)
-  @Get('/user/:id')
-  findOne(@Param('id') id: string, @Req() request: Request) {
-    // get the cookies
-    return this.authService.loginUser({
-      id,
-      cookie: request.cookies['userJWT'],
-    });
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
-  }
-
   @Post('/login')
   async login(
     @Body() loginUserDto: LoginDto,
@@ -86,18 +60,7 @@ export class AuthController {
 
     return {
       user: user,
-      token: accessToken
-    };
-  }
-
-  @UseGuards(AuthGuard)
-  @Post('/user/logout')
-  async logout(
-    @Res({ passthrough: true }) response: Response,
-  ): Promise<object> {
-    response.clearCookie('userJWT');
-    return {
-      message: 'logout successful',
+      token: accessToken,
     };
   }
 }

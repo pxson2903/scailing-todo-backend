@@ -3,9 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskEntity } from './entities/task.entity';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { TaskRepository } from './task.repository';
-import { WeatherServiceFactory } from 'src/weather/factories/weather-service.factory';
+import { WeatherServiceFactory } from '../weather/factories/weather-service.factory';
 import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Injectable()

@@ -7,7 +7,7 @@ import { TaskService } from './task.service';
 import { TaskController } from './task.controller';
 import { TaskEntity } from './entities/task.entity';
 import configuration from '../config/config';
-import { WeatherModule } from 'src/weather/weather.module';
+import { WeatherModule } from '../weather/weather.module';
 
 @Module({
   controllers: [TaskController],

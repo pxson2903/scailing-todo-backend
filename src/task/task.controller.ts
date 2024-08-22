@@ -15,10 +15,8 @@ import {
 
 import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { TaskEntity } from './entities/task.entity';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { TaskOwnerGuard } from './guards/task-owner.guard';
 
 @Controller('tasks')

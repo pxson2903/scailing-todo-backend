@@ -14,5 +14,5 @@ export default () => ({
     port: process.env.MAIL_PORT,
     from: process.env.MAIL_FROM,
   },
-  jwtSecret: process.env.JWT_SECRET
+  jwtSecret: process.env.JWT_SECRET,
 });
