@@ -19,13 +19,14 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskEntity } from './entities/task.entity';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { TaskOwnerGuard } from './guards/task-owner.guard';
 
 @Controller('tasks')
+@UseGuards(AuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  @UseGuards(AuthGuard)
   @Post('/')
   async create(@Body() createTaskDto: CreateTaskDto, @Req() request: Request) {
     const userId = request?.[`user`]?.id;
@@ -36,7 +37,6 @@ export class TaskController {
     });
   }
 
-  @UseGuards(AuthGuard)
   @Get('/')
   findAll(@Req() request: Request) {
     const userId = request?.[`user`]?.id;
@@ -45,6 +45,7 @@ export class TaskController {
     });
   }
 
+  @UseGuards(TaskOwnerGuard)
   @Get(':id')
   async findById(@Param('id') id: string) {
     const task = await this.taskService.findOne({ id: +id });
@@ -54,6 +55,7 @@ export class TaskController {
     return this.taskService.findOne({ id: +id });
   }
 
+  @UseGuards(TaskOwnerGuard)
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -62,6 +64,7 @@ export class TaskController {
     return this.taskService.update(+id, updateTask);
   }
 
+  @UseGuards(TaskOwnerGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.taskService.remove(+id);
