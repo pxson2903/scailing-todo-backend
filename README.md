@@ -15,6 +15,7 @@ $ docker compose up -d
 
 ```bash
 $ yarn install
+$ cp .env.example .env
 ```
 
 ## Compile and run the project

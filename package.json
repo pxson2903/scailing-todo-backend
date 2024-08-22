@@ -1,8 +1,8 @@
 {
-  "name": "todo-backend",
+  "name": "scailing-todo-backend",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "pxson.2903@gmail.com",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
