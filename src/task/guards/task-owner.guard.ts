@@ -14,7 +14,6 @@ export class TaskOwnerGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const userId = request?.[`user`]?.id;
 
-    console.log('userId', request?.[`user`]);
     const taskId = request.params.id;
 
     if (!userId || !taskId) {
